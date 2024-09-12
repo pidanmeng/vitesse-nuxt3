@@ -34,7 +34,6 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: false,
       routes: ['/'],
-      ignore: ['/hi'],
     },
   },
 
@@ -61,7 +60,6 @@ export default defineNuxtConfig({
   },
 
   features: {
-    // For UnoCSS
     inlineStyles: false,
   },
 
@@ -76,4 +74,8 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-08-14',
+
+  build: {
+    transpile: ['trpc-nuxt'],
+  },
 })

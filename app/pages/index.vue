@@ -1,27 +1,12 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'home',
-})
+import { appName } from '~/constants'
 
-const online = useOnline()
+const { $trpcClient } = useNuxtApp()
+const { data } = await $trpcClient.hello.useQuery({ text: 'tRPC' })
 </script>
 
 <template>
   <div>
-    <Logos mb-6 />
-    <Suspense>
-      <ClientOnly>
-        <PageView v-if="online" />
-        <div v-else text-gray:80>
-          You're offline
-        </div>
-      </ClientOnly>
-      <template #fallback>
-        <div italic op50>
-          <span animate-pulse>Loading...</span>
-        </div>
-      </template>
-    </Suspense>
-    <InputEntry />
+    <p>{{ data?.greeting }}</p>
   </div>
 </template>
