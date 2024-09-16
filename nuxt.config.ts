@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { appDescription } from './app/constants/index'
 
 export default defineNuxtConfig({
@@ -7,6 +8,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
+    '@vant/nuxt',
+    '@nuxtjs/supabase',
   ],
 
   plugins: [
@@ -23,6 +26,8 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
+    'vant/lib/index.css', // 添加Vant的CSS
+    '~/assets/css/vant-custom.css', // 添加自定义 CSS
   ],
 
   colorMode: {
@@ -81,5 +86,18 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ['trpc-nuxt'],
+  },
+
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
+    },
+  },
+
+  supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_KEY,
+    redirect: false,
   },
 })
